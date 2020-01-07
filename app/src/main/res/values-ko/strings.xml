@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">내일할거</string>
+
+    <string name="notification_message">할 일을 추가하려면 누르세요.</string>
 </resources>

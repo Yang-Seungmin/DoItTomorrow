@@ -9,6 +9,7 @@ import android.os.IBinder;
 import androidx.core.app.NotificationCompat;
 
 public class TodoInputService extends Service {
+    public static final int SERVICE_ID = 1001;
 
     private final IBinder binder = new TodoInputServiceBinder();
 
@@ -27,8 +28,20 @@ public class TodoInputService extends Service {
         return binder;
     }
 
-    private void createNotification() {
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        startForeground(SERVICE_ID, createNotification());
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+    private Notification createNotification() {
         Notification notification = new NotificationCompat.Builder(this, MainActivity.NOTIFICATION_CHANNEL_TODO_INSERT)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(getString(R.string.app_name))
+                .setContentText(getString(R.string.notification_message))
+                .setPriority(NotificationCompat.PRIORITY_MIN)
                 .build();
+
+        return notification;
     }
 }

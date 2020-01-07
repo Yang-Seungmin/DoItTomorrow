@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DoItTomorrow</string>
+
+    <string name="notification_message">To add a to-do, click me.</string>
 </resources>

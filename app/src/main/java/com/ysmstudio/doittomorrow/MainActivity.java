@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -17,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         createNotificationChannel();
+
+        Intent intent = new Intent(MainActivity.this, TodoInputService.class);
+        startService(intent);
     }
 
     //Oreo 이후 버전의 Notification Channel 추가
@@ -25,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             NotificationChannel notificationChannel = new NotificationChannel(
                     NOTIFICATION_CHANNEL_TODO_INSERT,
                     "Todo Insert Notification",
-                    NotificationManager.IMPORTANCE_DEFAULT
+                    NotificationManager.IMPORTANCE_MIN
             );
 
             getSystemService(NotificationManager.class).createNotificationChannel(notificationChannel);
