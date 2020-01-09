@@ -43,8 +43,8 @@ public class TodoRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ViewHolderNormal) {
-            //if (position < list.size())
-            //((ViewHolderNormal) holder).binding.setTodoData(list.get(position));
+            if (position < list.size())
+            ((ViewHolderNormal) holder).binding.setTodo(list.get(position));
         } else if (holder instanceof ViewHolderAdding) {
             addItemText = ((ViewHolderAdding) holder).binding.editTextName.getText();
         }
@@ -96,6 +96,10 @@ public class TodoRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     public void setAddItemVisibility(boolean addItemVisibility) {
         this.addItemVisibility = addItemVisibility;
         if (addItemVisibility) notifyItemInserted(list.size());
-        else notifyItemRemoved(list.size());
+        else notifyDataSetChanged();
+    }
+
+    public Editable getAddItemText() {
+        return addItemText;
     }
 }

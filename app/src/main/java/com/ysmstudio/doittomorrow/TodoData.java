@@ -1,5 +1,7 @@
 package com.ysmstudio.doittomorrow;
 
+import android.view.View;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -47,5 +49,9 @@ public class TodoData {
 
     public String getCreatedDateString() {
         return new SimpleDateFormat("hh:mm:ss a").format(new Date(createdDate)) + " 생성됨";
+    }
+
+    public int getVisibility() {
+        return checked ? View.VISIBLE : View.INVISIBLE;
     }
 }

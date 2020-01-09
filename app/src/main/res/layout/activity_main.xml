@@ -44,7 +44,8 @@
             android:layout_gravity="bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:backgroundTint="?attr/colorPrimaryVariant"/>
+            app:backgroundTint="?attr/colorPrimaryVariant"
+            app:hideOnScroll="true"/>
 
         <com.ysmstudio.doittomorrow.AnimatedFab
             android:id="@+id/fab"
@@ -52,7 +53,8 @@
             android:layout_height="wrap_content"
             app:layout_anchor="@id/bottom_app_bar"
             android:tint="?attr/colorOnSecondary"
-            android:onClick="@{activity::onFabClick}"/>
+            android:onClick="@{activity::onFabClick}"
+            app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -4,6 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="todo"
+            type="com.ysmstudio.doittomorrow.TodoData" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
@@ -15,22 +22,23 @@
             android:layout_height="1dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/color_divider"
+            android:background="?attr/colorOnSurface"
+            android:alpha="0.3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/item_check" />
+            app:layout_constraintStart_toEndOf="@id/item_image_check" />
 
         <TextView
             android:id="@+id/item_text_view_todo_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="56dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            app:layout_constraintBottom_toBottomOf="@+id/item_check"
+            android:text="@{todo.name}"
+            android:textAppearance="@style/AppTheme.Body1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/item_image_check"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="밖에 나가기" />
 
@@ -38,24 +46,39 @@
             android:id="@+id/item_text_view_created"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:paddingBottom="8dp"
+            android:text="@{todo.createdDateString}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
             app:layout_constraintStart_toStartOf="@+id/item_text_view_todo_title"
             app:layout_constraintTop_toBottomOf="@+id/item_text_view_todo_title"
             tools:text="오후 11:39 생성됨" />
 
         <ImageView
-            android:id="@+id/item_check"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:id="@+id/item_image_check"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:padding="4dp"
             android:tint="?attr/colorSecondary"
+            android:visibility="@{todo.checked ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_baseline_check_24" />
+
+        <ImageView
+            android:id="@+id/item_image_non_check"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="16dp"
+            android:padding="4dp"
+            android:tint="?attr/colorSecondary"
+            android:visibility="@{todo.checked ? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_clear_24" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

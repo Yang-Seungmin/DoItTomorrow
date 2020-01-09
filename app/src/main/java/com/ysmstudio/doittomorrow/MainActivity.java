@@ -43,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
     public void onFabClick(View view) {
         if(adapter != null) {
             if(adapter.isAddItemVisibility()) {
+                adapter.getList().add(new TodoData(
+                        adapter.getAddItemText().toString()
+                ));
+                adapter.getAddItemText().clear();
                 binding.fab.setShowingCheckMark(false);
                 adapter.setAddItemVisibility(false);
             } else {
