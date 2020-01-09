@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">DoItTomorrow</string>
+    <string name="app_name">내일할거</string>
 
     <string name="str_recycler_view_add_item_hint">Input something to do tomorrow</string>
 </resources>

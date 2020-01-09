@@ -4,12 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <variable
-            name="todo_data"
-            type="com.ysmstudio.doittomorrow.TodoData" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
@@ -34,7 +28,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:text="@{todo_data::getName}"
             app:layout_constraintBottom_toBottomOf="@+id/item_check"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +41,6 @@
             android:layout_marginTop="8dp"
             android:paddingBottom="8dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-            android:text="@{todo_data::getCreatedDateString}"
             app:layout_constraintStart_toStartOf="@+id/item_text_view_todo_title"
             app:layout_constraintTop_toBottomOf="@+id/item_text_view_todo_title"
             tools:text="오후 11:39 생성됨" />

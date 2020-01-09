@@ -6,8 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ysmstudio.doittomorrow.databinding.ActivityMainBinding;
 
+import android.graphics.drawable.AnimatedVectorDrawable;
 import android.os.Bundle;
 import android.view.View;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,11 +24,13 @@ public class MainActivity extends AppCompatActivity {
         binding.setActivity(this);
 
         setSupportActionBar(binding.toolbar);
+
         setRecyclerView();
     }
 
     private void setRecyclerView() {
         adapter = new TodoRecyclerViewAdapter();
+        adapter.setList(new ArrayList<TodoData>());
         binding.content.recyclerViewTodoTomorrow.setLayoutManager(
                 new LinearLayoutManager(this)
         );
@@ -33,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onFabClick(View view) {
-        
+        if(adapter != null) {
+            if(adapter.isAddItemVisibility()) {
+                binding.fab.setShowingCheckMark(false);
+                adapter.setAddItemVisibility(false);
+            } else {
+                binding.fab.setShowingCheckMark(true);
+                adapter.setAddItemVisibility(true);
+            }
+        }
     }
 }

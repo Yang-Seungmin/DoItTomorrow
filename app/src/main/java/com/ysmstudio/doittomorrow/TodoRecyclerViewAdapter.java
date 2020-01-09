@@ -1,6 +1,8 @@
 package com.ysmstudio.doittomorrow;
 
+import android.content.Context;
 import android.text.Editable;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -23,23 +25,35 @@ public class TodoRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view;
+
         switch (viewType) {
             case 1:
-                return new ViewHolderAdding(View.inflate(parent.getContext(), R.layout.recycler_todo_item_add, null));
+                view = View.inflate(parent.getContext(), R.layout.recycler_todo_item_add, null);
+                view.setLayoutParams( new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                return new ViewHolderAdding(view);
 
             default:
-                return new ViewHolderNormal(View.inflate(parent.getContext(), R.layout.recycler_todo_item, null));
+                view = View.inflate(parent.getContext(), R.layout.recycler_todo_item, null);
+                view.setLayoutParams( new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                return new ViewHolderNormal(view);
         }
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ViewHolderNormal) {
-            if (position < list.size())
-                ((ViewHolderNormal) holder).binding.setTodoData(list.get(position));
+            //if (position < list.size())
+            //((ViewHolderNormal) holder).binding.setTodoData(list.get(position));
         } else if (holder instanceof ViewHolderAdding) {
             addItemText = ((ViewHolderAdding) holder).binding.editTextName.getText();
         }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return addItemVisibility && (position == list.size()) ? 1 : 0;
     }
 
     @Override
@@ -47,10 +61,6 @@ public class TodoRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         return list.size() + (addItemVisibility ? 1 : 0);
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        return addItemVisibility && position == list.size() - 1 ? 1 : 0;
-    }
 
     public static class ViewHolderNormal extends RecyclerView.ViewHolder {
         RecyclerTodoItemBinding binding;
@@ -86,6 +96,7 @@ public class TodoRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     public void setAddItemVisibility(boolean addItemVisibility) {
         this.addItemVisibility = addItemVisibility;
-        if(addItemVisibility) notifyItemInserted(list.size());
+        if (addItemVisibility) notifyItemInserted(list.size());
+        else notifyItemRemoved(list.size());
     }
 }
