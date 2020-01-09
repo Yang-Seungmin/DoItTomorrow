@@ -17,9 +17,8 @@ import java.util.ArrayList;
 
 public class TodoRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private ArrayList<TodoData> list;
     private boolean addItemVisibility = false;
-
+    private ArrayList<TodoData> list;
     private Editable addItemText;
 
     @NonNull
