@@ -5,9 +5,9 @@
     tools:showIn="@layout/activity_main">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/container"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <com.ysmstudio.doittomorrow.RecyclerViewWithEmptyView
@@ -18,6 +18,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

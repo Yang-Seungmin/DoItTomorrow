@@ -48,7 +48,7 @@ public class TodoData {
     }
 
     public String getCreatedDateString() {
-        return new SimpleDateFormat("hh:mm:ss a").format(new Date(createdDate)) + " 생성됨";
+        return new SimpleDateFormat("a hh:mm").format(new Date(createdDate)) + "에 생성됨";
     }
 
     public int getVisibility() {
