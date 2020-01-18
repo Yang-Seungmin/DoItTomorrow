@@ -40,9 +40,6 @@ public class MainActivity extends AppCompatActivity {
                 new LinearLayoutManager(this)
         );
         binding.content.recyclerViewTodoTomorrow.setAdapter(adapter);
-        binding.content.recyclerViewTodoTomorrow.setEmptyView(
-                View.inflate(this, R.layout.content_empty, null)
-        );
     }
 
     public void onFabClick(View view) {

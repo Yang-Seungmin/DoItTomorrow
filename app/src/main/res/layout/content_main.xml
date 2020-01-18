@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.ysmstudio.doittomorrow.RecyclerViewWithEmptyView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_todo_tomorrow"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
