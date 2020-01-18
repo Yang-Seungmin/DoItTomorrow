@@ -59,12 +59,16 @@ public class MainActivity extends AppCompatActivity {
         timePreference = getSharedPreferences("pref_time", MODE_PRIVATE);
 
         setSupportActionBar(binding.toolbar);
+    }
 
-        showRecyclerViewProgressBar();
+    @Override
+    protected void onResume() {
+        super.onResume();
         loadTodoData();
     }
 
     private void loadTodoData() {
+        showRecyclerViewProgressBar();
         RealmConfiguration todoRealmConfiguration = new RealmConfiguration.Builder()
                 .name("todos.realm").build();
 
