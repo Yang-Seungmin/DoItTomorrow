@@ -22,6 +22,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -80,13 +81,17 @@ public class MainActivity extends AppCompatActivity {
         Calendar calendarStart = Calendar.getInstance();
         calendarStart.set(Calendar.HOUR_OF_DAY, timePreference.getInt("reset_hour", 6));
         calendarStart.set(Calendar.MINUTE, timePreference.getInt("reset_minute", 0));
+        calendarStart.set(Calendar.SECOND, 0);
+        calendarStart.set(Calendar.MILLISECOND, 0);
+        calendarStart.add(Calendar.DATE, -1);
 
         Calendar calendarEnd = Calendar.getInstance();
         calendarEnd.set(Calendar.HOUR_OF_DAY, timePreference.getInt("reset_hour", 6));
         calendarEnd.set(Calendar.MINUTE, timePreference.getInt("reset_minute", 0));
-        calendarEnd.add(Calendar.DATE, 1);
+        calendarEnd.set(Calendar.SECOND, 0);
+        calendarEnd.set(Calendar.MILLISECOND, 0);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-DD a hh:mm");
+        DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance();
 
         Log.d("times", "From " + dateFormat.format(calendarStart.getTimeInMillis()) + " End " + dateFormat.format(calendarEnd.getTimeInMillis()));
 
