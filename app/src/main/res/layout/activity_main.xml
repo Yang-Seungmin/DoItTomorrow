@@ -39,20 +39,13 @@
             android:id="@+id/content"
             layout="@layout/content_main" />
 
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bottom_app_bar"
-            android:layout_gravity="bottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:backgroundTint="?attr/colorPrimaryVariant"
-            app:hideOnScroll="true"/>
-
         <com.ysmstudio.doittomorrow.AnimatedFab
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_anchor="@id/bottom_app_bar"
             android:tint="?attr/colorOnSecondary"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="16dp"
             android:onClick="@{activity::onFabClick}"
             app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"/>
 
