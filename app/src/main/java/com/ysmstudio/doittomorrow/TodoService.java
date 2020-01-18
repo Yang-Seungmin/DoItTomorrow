@@ -8,17 +8,17 @@ import android.os.IBinder;
 
 import androidx.core.app.NotificationCompat;
 
-public class TodoInputService extends Service {
+public class TodoService extends Service {
     public static final int SERVICE_ID = 1001;
 
     private final IBinder binder = new TodoInputServiceBinder();
 
-    public TodoInputService() {
+    public TodoService() {
     }
 
     public class TodoInputServiceBinder extends Binder {
-        TodoInputService getService() {
-            return TodoInputService.this;
+        TodoService getService() {
+            return TodoService.this;
         }
     }
 
@@ -37,8 +37,8 @@ public class TodoInputService extends Service {
     private Notification createNotification() {
         Notification notification = new NotificationCompat.Builder(this, MainActivity.NOTIFICATION_CHANNEL_TODO_INSERT)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle(getString(R.string.app_name))
-                .setContentText(getString(R.string.notification_message))
+                .setContentTitle("오늘은 4개의 할 일이 있습니다")
+                .setContentText("aaa")
                 .setPriority(NotificationCompat.PRIORITY_MIN)
                 .build();
 

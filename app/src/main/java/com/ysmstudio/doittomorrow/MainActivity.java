@@ -10,7 +10,7 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String NOTIFICATION_CHANNEL_TODO_INSERT = "TODOINSERT";
+    public static final String NOTIFICATION_CHANNEL_TODO_INSERT = "TODO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         createNotificationChannel();
 
-        Intent intent = new Intent(MainActivity.this, TodoInputService.class);
+        Intent intent = new Intent(MainActivity.this, TodoService.class);
         startService(intent);
     }
 
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(
                     NOTIFICATION_CHANNEL_TODO_INSERT,
-                    "Todo Insert Notification",
+                    "All todo Notification",
                     NotificationManager.IMPORTANCE_MIN
             );
 

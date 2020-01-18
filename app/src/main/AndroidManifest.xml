@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <service
-            android:name=".TodoInputService"
+            android:name=".TodoService"
             android:enabled="true"
             android:exported="false"></service>
 
