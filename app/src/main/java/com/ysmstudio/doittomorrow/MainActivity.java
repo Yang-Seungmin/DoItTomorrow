@@ -55,16 +55,18 @@ public class MainActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setActivity(this);
 
+        timePreference = getSharedPreferences("pref_time", MODE_PRIVATE);
+
         setSupportActionBar(binding.bottomAppBar);
 
+        showRecyclerViewProgressBar();
+        loadTodoData();
+    }
+
+    private void loadTodoData() {
         RealmConfiguration todoRealmConfiguration = new RealmConfiguration.Builder()
                 .name("todos.realm").build();
 
-        showRecyclerViewProgressBar();
-
-        timePreference = getSharedPreferences("pref_time", MODE_PRIVATE);
-
-        // Realm Data 불러오기
         todoRealm = Realm.getInstance(todoRealmConfiguration);
         long[] times = getListTimeMilis();
         todoDataRealmResults = todoRealm.where(TodoData.class)
@@ -133,6 +135,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onFabClick(View view) {
+        showAddDialog();
+    }
+
+    private void showAddDialog() {
         final View inflate = View.inflate(this, R.layout.dialog_todo_item_add, null);
         AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle("New todo")
