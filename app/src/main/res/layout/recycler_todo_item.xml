@@ -26,7 +26,7 @@
             android:alpha="0.15"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/item_image_check" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/item_text_view_todo_title"
@@ -38,7 +38,7 @@
             android:text="@{todo.name}"
             android:textAppearance="@style/AppTheme.Body1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/item_image_check"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="밖에 나가기" />
 
@@ -53,32 +53,6 @@
             app:layout_constraintStart_toStartOf="@+id/item_text_view_todo_title"
             app:layout_constraintTop_toBottomOf="@+id/item_text_view_todo_title"
             tools:text="오후 11:39 생성됨" />
-
-        <ImageView
-            android:id="@+id/item_image_check"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="16dp"
-            android:padding="4dp"
-            android:tint="?attr/colorSecondary"
-            android:visibility="@{todo.checked ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_baseline_check_24" />
-
-        <ImageView
-            android:id="@+id/item_image_non_check"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="16dp"
-            android:padding="4dp"
-            android:tint="?attr/colorSecondary"
-            android:visibility="@{todo.checked ? View.INVISIBLE : View.VISIBLE}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_baseline_clear_24" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
