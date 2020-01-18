@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         timePreference = getSharedPreferences("pref_time", MODE_PRIVATE);
 
-        setSupportActionBar(binding.bottomAppBar);
+        setSupportActionBar(binding.toolbar);
 
         showRecyclerViewProgressBar();
         loadTodoData();
