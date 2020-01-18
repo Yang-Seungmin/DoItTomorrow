@@ -11,7 +11,9 @@ import com.ysmstudio.doittomorrow.databinding.ActivityMainBinding;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,12 +22,33 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
+import io.realm.Realm;
+import io.realm.RealmChangeListener;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
 
-    ActivityMainBinding binding;
-    TodoRecyclerViewAdapter adapter;
+    private ActivityMainBinding binding;
+    private TodoRecyclerViewAdapter adapter;
+
+    private Realm todoRealm;
+    private RealmResults<TodoData> todoDataRealmResults;
+    private RealmChangeListener<RealmResults<TodoData>> todoDataRealmChangeListener = new RealmChangeListener<RealmResults<TodoData>>() {
+        @Override
+        public void onChange(RealmResults<TodoData> todoData) {
+            setRecyclerView();
+            hideRecyclerViewProgressBar();
+        }
+    };
+
+    private SharedPreferences timePreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +56,56 @@ public class MainActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setActivity(this);
 
+        timePreference = getSharedPreferences("pref_time", MODE_PRIVATE);
+
         setSupportActionBar(binding.bottomAppBar);
 
-        setRecyclerView();
+        showRecyclerViewProgressBar();
+        loadTodoData();
+    }
+
+    private void loadTodoData() {
+        RealmConfiguration todoRealmConfiguration = new RealmConfiguration.Builder()
+                .name("todos.realm").build();
+
+        todoRealm = Realm.getInstance(todoRealmConfiguration);
+        long[] times = getListTimeMilis();
+        todoDataRealmResults = todoRealm.where(TodoData.class)
+                .greaterThan("createdDate", times[0])
+                .lessThan("createdDate", times[1])
+                .findAllAsync();
+        todoDataRealmResults.addChangeListener(todoDataRealmChangeListener);
+    }
+
+    private long[] getListTimeMilis() {
+        Calendar calendarStart = Calendar.getInstance();
+        calendarStart.set(Calendar.HOUR_OF_DAY, timePreference.getInt("reset_hour", 6));
+        calendarStart.set(Calendar.MINUTE, timePreference.getInt("reset_minute", 0));
+        calendarStart.set(Calendar.SECOND, 0);
+        calendarStart.set(Calendar.MILLISECOND, 0);
+        calendarStart.add(Calendar.DATE, -1);
+
+        Calendar calendarEnd = Calendar.getInstance();
+        calendarEnd.set(Calendar.HOUR_OF_DAY, timePreference.getInt("reset_hour", 6));
+        calendarEnd.set(Calendar.MINUTE, timePreference.getInt("reset_minute", 0));
+        calendarEnd.set(Calendar.SECOND, 0);
+        calendarEnd.set(Calendar.MILLISECOND, 0);
+
+        DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance();
+
+        Log.d("times", "From " + dateFormat.format(calendarStart.getTimeInMillis()) + " End " + dateFormat.format(calendarEnd.getTimeInMillis()));
+
+        return new long[]{calendarStart.getTimeInMillis(), calendarEnd.getTimeInMillis()};
+    }
+
+    private void showRecyclerViewProgressBar() {
+        binding.content.progressBar.setVisibility(View.VISIBLE);
+        binding.content.recyclerViewTodoTomorrow.setVisibility(View.GONE);
+    }
+
+    private void hideRecyclerViewProgressBar() {
+        binding.content.progressBar.setVisibility(View.GONE);
+        binding.content.recyclerViewTodoTomorrow.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -57,7 +127,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void setRecyclerView() {
         adapter = new TodoRecyclerViewAdapter();
-        adapter.setList(new ArrayList<TodoData>());
+
+        adapter.setList(new ArrayList<>(todoDataRealmResults));
+
         binding.content.recyclerViewTodoTomorrow.setLayoutManager(
                 new LinearLayoutManager(this)
         );
@@ -68,6 +140,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onFabClick(View view) {
+        showAddDialog();
+    }
+
+    private void showAddDialog() {
         final View inflate = View.inflate(this, R.layout.dialog_todo_item_add, null);
         AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle("New todo")
@@ -79,11 +155,12 @@ public class MainActivity extends AppCompatActivity {
                         if (editText.getText().toString().length() <= 0)
                             Toast.makeText(MainActivity.this, "You must enter at least one letter.", Toast.LENGTH_SHORT).show();
                         else {
-                            adapter.getList().add(new TodoData(
-                                    editText.getText().toString()
-                            ));
+                            TodoData newTodoData = new TodoData(editText.getText().toString());
+                            adapter.getList().add(newTodoData);
                             adapter.notifyItemInserted(adapter.getItemCount());
-
+                            todoRealm.beginTransaction();
+                            todoRealm.copyToRealm(newTodoData);
+                            todoRealm.commitTransaction();
                         }
                     }
                 })
