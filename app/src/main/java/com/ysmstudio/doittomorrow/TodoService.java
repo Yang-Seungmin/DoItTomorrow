@@ -6,12 +6,11 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 
+import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 public class TodoService extends Service {
     public static final int SERVICE_ID = 1001;
-
-    private final IBinder binder = new TodoInputServiceBinder();
 
     public TodoService() {
     }
@@ -23,15 +22,15 @@ public class TodoService extends Service {
     }
 
     @Override
-    public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
-        return binder;
-    }
-
-    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         startForeground(SERVICE_ID, createNotification());
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 
     private Notification createNotification() {
