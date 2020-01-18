@@ -18,6 +18,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <include android:id="@+id/recycler_empty_view"
+            layout="@layout/content_empty" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
