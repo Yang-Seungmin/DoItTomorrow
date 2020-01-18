@@ -39,6 +39,9 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public static class SettingsFragment extends PreferenceFragmentCompat {
+
+        DoItTomorrow doItTomorrow;
+
         SharedPreferences timePreference;
         Preference prefResetTime;
 
@@ -55,6 +58,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         private void init() {
+            doItTomorrow = (DoItTomorrow) getActivity().getApplication();
             timePreference = getContext().getSharedPreferences("pref_time", MODE_PRIVATE);
 
             prefResetTime = findPreference("pref_reset_time");
@@ -64,7 +68,6 @@ public class SettingsActivity extends AppCompatActivity {
                 new Preference.OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
-
                         View dialogView = View.inflate(getContext(), R.layout.dialog_settings_time_picker, null);
                         final TimePicker timePicker = dialogView.findViewById(R.id.time_picker);
 
@@ -92,6 +95,7 @@ public class SettingsActivity extends AppCompatActivity {
                                         setResetTime(h, m);
 
                                         displayResetTime();
+                                        doItTomorrow.createAlarm();
                                     }
                                 })
                                 .setNegativeButton(getString(R.string.dialog_button_cancel), null)
