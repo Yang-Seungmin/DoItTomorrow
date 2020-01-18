@@ -2,8 +2,16 @@
 <resources>
     <string name="app_name">내일할거</string>
 
-    <string name="str_recycler_view_add_item_hint">Input something to do tomorrow</string>
+    <string name="str_recycler_view_add_item_hint">할 일을 입력하세요.</string>
+
+    <string name="dialog_button_ok">확인</string>
+    <string name="dialog_button_cancel">취소</string>
 
     <string name="str_recycler_view_empty_title">내일 할 게 아무것도 없네요</string>
     <string name="str_recycler_view_empty_subtitle">내일 할 일을 만드려면 + 버튼을 누르세요</string>
+
+    <string name="title_activity_settings">설정</string>
+
+    <string name="settings_pref_reset_time_title">초기화 시간</string>
+    <string name="settings_pref_reset_time_summary">%1$s에 모든 내용을 초기화하고 알립니다.</string>
 </resources>
