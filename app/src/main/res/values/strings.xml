@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">DoItTomorrow</string>
+
+    <string name="str_recycler_view_add_item_hint">Input something to do tomorrow</string>
+
+    <string name="str_recycler_view_empty_title">You don\'t have something to do tomorrow</string>
+    <string name="str_recycler_view_empty_subtitle">Click + button to create a todo</string>
 </resources>

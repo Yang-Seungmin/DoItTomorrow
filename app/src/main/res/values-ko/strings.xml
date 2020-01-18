@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">내일할거</string>
+
+    <string name="str_recycler_view_add_item_hint">Input something to do tomorrow</string>
+
+    <string name="str_recycler_view_empty_title">내일 할 게 아무것도 없네요</string>
+    <string name="str_recycler_view_empty_subtitle">내일 할 일을 만드려면 + 버튼을 누르세요</string>
+</resources>
