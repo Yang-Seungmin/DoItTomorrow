@@ -1,5 +1,6 @@
 package com.ysmstudio.doittomorrow;
 
+import android.app.AlarmManager;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -7,9 +8,11 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.widget.Toast;
 
 import androidx.preference.Preference;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import io.realm.Realm;
@@ -20,6 +23,7 @@ public class DoItTomorrow extends Application {
     public static final String CHANNEL_ID_TODAY_TODO = "TODAY_TODO_CHANNEL";
 
     private SharedPreferences timePreference;
+    private PendingIntent pendingIntent;
 
     @Override
     public void onCreate() {
@@ -27,9 +31,26 @@ public class DoItTomorrow extends Application {
         createNotificationChannel();
         Realm.init(this);
         timePreference = getSharedPreferences("pref_time", MODE_PRIVATE);
-        createTodayTodoNotiPendingIntent(
+        pendingIntent = createTodayTodoNotiPendingIntent(
                 timePreference.getInt("reset_hour", 6),
                 timePreference.getInt("reset_minute", 0)
+        );
+        createAlarm();
+    }
+
+    public void createAlarm() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, timePreference.getInt("reset_hour", 6));
+        calendar.set(Calendar.MINUTE, timePreference.getInt("reset_minute", 0));
+        calendar.set(Calendar.SECOND, 0);
+
+        Toast.makeText(this, SimpleDateFormat.getDateTimeInstance().format(calendar.getTimeInMillis()), Toast.LENGTH_SHORT).show();
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.set(
+                AlarmManager.RTC_WAKEUP,
+                calendar.getTimeInMillis(),
+                pendingIntent
         );
     }
 
@@ -45,7 +66,7 @@ public class DoItTomorrow extends Application {
         }
     }
 
-    public void createTodayTodoNotiPendingIntent(int hour, int minute) {
+    public PendingIntent createTodayTodoNotiPendingIntent(int hour, int minute) {
         Intent intent = new Intent("com.ysmstudio.doittomorrow.RESET_ALARM");
         intent.putExtra("hour", hour);
         intent.putExtra("minute", minute);
@@ -56,5 +77,7 @@ public class DoItTomorrow extends Application {
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT
         );
+
+        return pendingIntent;
     }
 }
