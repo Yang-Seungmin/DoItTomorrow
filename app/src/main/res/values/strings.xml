@@ -16,4 +16,9 @@
 
     <string name="settings_pref_reset_time_title">Reset time</string>
     <string name="settings_pref_reset_time_summary">Reset all todo and notify at %1$s</string>
+
+    <plurals name="noti_today_todo_title">
+        <item quantity="one">Today you have %1$s todo</item>
+        <item quantity="other">Today you have %1$s todos</item>
+    </plurals>
 </resources>

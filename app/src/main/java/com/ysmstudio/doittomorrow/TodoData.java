@@ -55,4 +55,8 @@ public class TodoData extends RealmObject {
         return new SimpleDateFormat("a hh:mm").format(new Date(createdDate)) + "에 생성됨";
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }
