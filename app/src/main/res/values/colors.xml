@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="dit_brown">#443936</color>
+    <color name="dit_brown_light">#6f6360</color>
+    <color name="dit_brown_dark">#1d1310</color>
+    <color name="dit_teal">#445957</color>
+    <color name="dit_teal_light">#708684</color>
+    <color name="dit_teal_dark">#1c302e</color>
+
+    <color name="color_on_primary">#ffffff</color>
+    <color name="color_on_secondary">#ffffff</color>
 </resources>

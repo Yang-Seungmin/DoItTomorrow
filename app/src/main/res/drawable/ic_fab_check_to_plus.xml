@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_anim_baseline_add_24">
+    <target
+        android:animation="@animator/fab_animator_check_to_plus"
+        android:name="add" />
+    <target
+        android:animation="@animator/fab_rotation"
+        android:name="rotation" />
+
+</animated-vector>
