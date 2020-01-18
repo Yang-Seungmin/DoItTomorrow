@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private void setRecyclerView() {
         adapter = new TodoRecyclerViewAdapter();
         adapter.setList(new ArrayList<TodoData>());
-        adapter.setEmptyView(binding.content.recyclerEmptyView);
+        adapter.setEmptyView(binding.content.recyclerEmptyView.getRoot());
         binding.content.recyclerViewTodoTomorrow.setLayoutManager(
                 new LinearLayoutManager(this)
         );
@@ -73,5 +73,9 @@ public class MainActivity extends AppCompatActivity {
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         dialog.show();
         inflate.findViewById(R.id.edit_text_name).requestFocus();
+    }
+
+    public void onViewPreviousTodoClock(View view) {
+        // TODO: 2020-01-19 previous activity 이동
     }
 }
