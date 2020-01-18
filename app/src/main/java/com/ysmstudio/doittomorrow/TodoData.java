@@ -5,7 +5,12 @@ import android.view.View;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import io.realm.annotations.PrimaryKey;
+
 public class TodoData {
+
+    @PrimaryKey
+    private long id;
 
     String name;
     long createdDate;
