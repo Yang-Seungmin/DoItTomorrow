@@ -30,7 +30,7 @@
                 app:titleTextColor="?attr/colorOnPrimary"
                 app:subtitleTextColor="?attr/colorOnPrimary"
                 app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Caption"
-                tools:title="내일할거"
+                app:title="@string/app_name"
                 tools:subtitle="2020년 1월 8일"/>
 
         </com.google.android.material.appbar.AppBarLayout>
