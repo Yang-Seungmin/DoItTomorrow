@@ -10,10 +10,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service
-            android:name=".TodayTodoNotifyService"
+        <receiver
+            android:name=".TodayTodoNotiReceiver"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.ysmstudio.doittomorrow.RESET_ALARM" />
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".SettingsActivity"
