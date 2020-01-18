@@ -1,5 +1,6 @@
 package com.ysmstudio.doittomorrow;
 
+import android.util.Log;
 import android.view.View;
 
 import java.text.SimpleDateFormat;
@@ -50,6 +51,7 @@ public class TodoData extends RealmObject {
     }
 
     public String getCreatedDateString() {
+        Log.d("times_item", SimpleDateFormat.getDateTimeInstance().format(new Date(createdDate)));
         return new SimpleDateFormat("a hh:mm").format(new Date(createdDate)) + "에 생성됨";
     }
 

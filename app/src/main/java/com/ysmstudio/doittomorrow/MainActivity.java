@@ -87,13 +87,13 @@ public class MainActivity extends AppCompatActivity {
         calendarStart.set(Calendar.MINUTE, timePreference.getInt("reset_minute", 0));
         calendarStart.set(Calendar.SECOND, 0);
         calendarStart.set(Calendar.MILLISECOND, 0);
-        calendarStart.add(Calendar.DATE, -1);
 
         Calendar calendarEnd = Calendar.getInstance();
         calendarEnd.set(Calendar.HOUR_OF_DAY, timePreference.getInt("reset_hour", 6));
         calendarEnd.set(Calendar.MINUTE, timePreference.getInt("reset_minute", 0));
         calendarEnd.set(Calendar.SECOND, 0);
         calendarEnd.set(Calendar.MILLISECOND, 0);
+        calendarEnd.add(Calendar.DATE, 1);
 
         DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance();
 
