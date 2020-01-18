@@ -5,24 +5,32 @@ import android.view.View;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class TodoData {
+public class TodoData extends RealmObject {
+    private String name;
 
     @PrimaryKey
-    private long id;
+    private long createdDate;
+    private boolean isChecked;
 
-    String name;
-    long createdDate;
+    public TodoData() {
+        this.name = null;
+        createdDate = System.currentTimeMillis();
+        isChecked = false;
+    }
 
     public TodoData(String name) {
         this.name = name;
         createdDate = System.currentTimeMillis();
+        isChecked = false;
     }
 
     public TodoData(String name, long createdDate, boolean checked) {
         this.name = name;
         this.createdDate = createdDate;
+        isChecked = checked;
     }
 
     public String getName() {
