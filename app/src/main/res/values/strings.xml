@@ -3,10 +3,13 @@
 
     <string name="str_recycler_view_add_item_hint">Input something to do tomorrow</string>
 
+    <string name="dialog_button_ok">OK</string>
+    <string name="dialog_button_cancel">Cancel</string>
+
     <string name="str_recycler_view_empty_title">You don\'t have something to do tomorrow</string>
     <string name="str_recycler_view_empty_subtitle">Click + button to create a todo</string>
     <string name="title_activity_settings">Settings</string>
 
-    <string name="settings_pref_reset_time_title">초기화 시간</string>
-    <string name="settings_pref_reset_time_summary">%1$s에 모든 내용을 초기화하고 알립니다.</string>
+    <string name="settings_pref_reset_time_title">Reset time</string>
+    <string name="settings_pref_reset_time_summary">Reset all todo and notify at %1$s</string>
 </resources>
