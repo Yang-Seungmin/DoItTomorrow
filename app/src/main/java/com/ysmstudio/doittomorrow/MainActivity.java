@@ -131,9 +131,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void setRecyclerView() {
         adapter = new TodoRecyclerViewAdapter();
-
         adapter.setList(new ArrayList<>(todoDataRealmResults));
-
+        adapter.setEmptyView(binding.content.recyclerEmptyView);
         binding.content.recyclerViewTodoTomorrow.setLayoutManager(
                 new LinearLayoutManager(this)
         );
