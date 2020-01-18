@@ -2,10 +2,12 @@
 <resources>
     <string name="app_name">내일할거</string>
 
-    <string name="str_recycler_view_add_item_hint">할 일을 입력하세요.</string>
-
     <string name="dialog_button_ok">확인</string>
     <string name="dialog_button_cancel">취소</string>
+
+    <string name="dialog_new_todo_hint">할 일을 입력하세요.</string>
+    <string name="dialog_new_todo_title">새 할 일</string>
+    <string name="dialog_new_todo_create">만들기</string>
 
     <string name="str_recycler_view_empty_title">내일 할 게 아무것도 없네요</string>
     <string name="str_recycler_view_empty_subtitle">내일 할 일을 만드려면 + 버튼을 누르세요</string>

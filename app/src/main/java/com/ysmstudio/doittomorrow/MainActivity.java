@@ -143,9 +143,9 @@ public class MainActivity extends AppCompatActivity {
     private void showAddDialog() {
         final View inflate = View.inflate(this, R.layout.dialog_todo_item_add, null);
         AlertDialog dialog = new MaterialAlertDialogBuilder(this)
-                .setTitle("New todo")
+                .setTitle(getString(R.string.dialog_new_todo_title))
                 .setView(inflate)
-                .setPositiveButton("Create", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getString(R.string.dialog_new_todo_create), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         EditText editText = ((EditText) inflate.findViewById(R.id.edit_text_name));
@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getString(R.string.dialog_button_cancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
