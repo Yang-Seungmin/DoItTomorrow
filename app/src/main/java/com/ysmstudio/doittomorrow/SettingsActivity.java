@@ -51,7 +51,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             init();
 
-            if(prefResetTime != null){
+            if(prefResetTime != null) {
                 displayResetTime();
                 prefResetTime.setOnPreferenceClickListener(onPreferenceClickListenerReset);
             }

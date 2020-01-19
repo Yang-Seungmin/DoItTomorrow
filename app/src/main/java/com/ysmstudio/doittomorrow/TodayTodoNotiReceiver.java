@@ -1,6 +1,7 @@
 package com.ysmstudio.doittomorrow;
 
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -20,12 +22,13 @@ import io.realm.RealmResults;
 
 public class TodayTodoNotiReceiver extends BroadcastReceiver {
 
+    public static final int NOTI_ID_TODAY_TODO = 101;
+
     private Context context;
     private int hour, minute;
 
     private SharedPreferences timePreference;
 
-    private Realm todoRealm;
     private RealmResults<TodoData> todoDataRealmResults;
     private RealmChangeListener<RealmResults<TodoData>> todoDataRealmChangeListener = new RealmChangeListener<RealmResults<TodoData>>() {
         @Override
@@ -46,24 +49,29 @@ public class TodayTodoNotiReceiver extends BroadcastReceiver {
 
     private void createNotification(Context context) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (TodoData e : todoDataRealmResults)
-            stringBuilder.append(e).append("\n");
+        for (int i = 0; i < todoDataRealmResults.size(); i++) {
+            stringBuilder.append(todoDataRealmResults.get(i));
+            if(i < todoDataRealmResults.size() - 1) stringBuilder.append('\n');
+        }
 
         Notification notification = new NotificationCompat.Builder(context, DoItTomorrow.CHANNEL_ID_TODAY_TODO)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(context.getResources().getQuantityString(R.plurals.noti_today_todo_title,
                         todoDataRealmResults.size(),
                         todoDataRealmResults.size()))
-                .setContentText(stringBuilder)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(stringBuilder))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .build();
+
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
+        notificationManagerCompat.notify(NOTI_ID_TODAY_TODO, notification);
     }
 
     private void loadTodoData() {
         RealmConfiguration todoRealmConfiguration = new RealmConfiguration.Builder()
                 .name("todos.realm").build();
 
-        todoRealm = Realm.getInstance(todoRealmConfiguration);
+        Realm todoRealm = Realm.getInstance(todoRealmConfiguration);
         long[] times = getListTimeMilis();
         todoDataRealmResults = todoRealm.where(TodoData.class)
                 .greaterThan("createdDate", times[0])
