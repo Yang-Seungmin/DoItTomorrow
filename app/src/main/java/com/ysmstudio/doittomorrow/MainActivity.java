@@ -75,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
         todoRealm = Realm.getInstance(todoRealmConfiguration);
         long[] times = getListTimeMilis();
         todoDataRealmResults = todoRealm.where(TodoData.class)
-                .greaterThan("createdDate", times[0])
-                .lessThan("createdDate", times[1])
+                .greaterThanOrEqualTo("createdDate", times[0])
+                .lessThanOrEqualTo("createdDate", times[1])
                 .findAllAsync();
         todoDataRealmResults.addChangeListener(todoDataRealmChangeListener);
     }

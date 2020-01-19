@@ -16,4 +16,8 @@
 
     <string name="settings_pref_reset_time_title">초기화 시간</string>
     <string name="settings_pref_reset_time_summary">%1$s에 모든 내용을 초기화하고 알립니다.</string>
+
+    <plurals name="noti_today_todo_title">
+        <item quantity="other">오늘은 %1$s개의 할 일이 있어요</item>
+    </plurals>
 </resources>

@@ -50,9 +50,22 @@ public class TodoData extends RealmObject {
         this.createdDate = createdDate;
     }
 
-    public String getCreatedDateString() {
-        Log.d("times_item", SimpleDateFormat.getDateTimeInstance().format(new Date(createdDate)));
-        return new SimpleDateFormat("a hh:mm").format(new Date(createdDate)) + "에 생성됨";
+    public boolean isChecked() {
+        return isChecked;
     }
 
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
+
+    public String getCreatedDateString() {
+        Log.d("times_item", SimpleDateFormat.getDateTimeInstance().format(new Date(createdDate)));
+        return SimpleDateFormat.getDateTimeInstance().format(createdDate) + "에 생성됨";
+        //return new SimpleDateFormat("a hh:mm").format(new Date(createdDate)) + "에 생성됨";
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
