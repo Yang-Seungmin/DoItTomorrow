@@ -14,6 +14,7 @@ public class TodoData extends RealmObject {
 
     @PrimaryKey
     private long createdDate;
+
     private boolean isChecked;
 
     public TodoData() {
