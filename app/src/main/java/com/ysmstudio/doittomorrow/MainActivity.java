@@ -5,8 +5,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.ysmstudio.doittomorrow.databinding.ActivityMainBinding;
 
 import android.content.DialogInterface;
@@ -137,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 new LinearLayoutManager(this)
         );
         binding.content.recyclerViewTodoTomorrow.setAdapter(adapter);
+        binding.content.recyclerViewTodoTomorrow.setOnSwipeListener(onSwipeListener);
     }
 
     public void onFabClick(View view) {
@@ -179,4 +183,35 @@ public class MainActivity extends AppCompatActivity {
     public void onViewPreviousTodoClock(View view) {
         // TODO: 2020-01-19 previous activity 이동
     }
+
+    private SwipeDeleteRecyclerView.OnSwipeListener onSwipeListener = new SwipeDeleteRecyclerView.OnSwipeListener() {
+        @Override
+        public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, final int position, int direction) {
+            if(todoRealm != null) {
+                todoRealm.executeTransactionAsync(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        
+                    }
+                }, new Realm.Transaction.OnSuccess() {
+                    @Override
+                    public void onSuccess() {
+                        todoRealm.beginTransaction();
+                        todoRealm.where(TodoData.class)
+                                .equalTo("createdDate", adapter.getList().get(position).getCreatedDate())
+                                .findAll()
+                                .deleteAllFromRealm();
+                        todoRealm.commitTransaction();
+
+                        Snackbar.make(getWindow().getDecorView(), "삭제되었습니다.", BaseTransientBottomBar.LENGTH_SHORT).show();
+                    }
+                }, new Realm.Transaction.OnError() {
+                    @Override
+                    public void onError(Throwable error) {
+
+                    }
+                });
+            }
+        }
+    };
 }
