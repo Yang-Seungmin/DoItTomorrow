@@ -2,6 +2,7 @@ package com.ysmstudio.doittomorrow;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +24,7 @@ import io.realm.RealmResults;
 public class TodayTodoNotiReceiver extends BroadcastReceiver {
 
     public static final int NOTI_ID_TODAY_TODO = 101;
+    public static final int NOTI_GOTO_CALENDAR = 102;
 
     private Context context;
     private int hour, minute;
@@ -54,6 +56,14 @@ public class TodayTodoNotiReceiver extends BroadcastReceiver {
             if(i < todoDataRealmResults.size() - 1) stringBuilder.append('\n');
         }
 
+        Intent intent = new Intent(context, CalendarActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(
+                context,
+                NOTI_GOTO_CALENDAR,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+        );
+
         Notification notification = new NotificationCompat.Builder(context, DoItTomorrow.CHANNEL_ID_TODAY_TODO)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(context.getResources().getQuantityString(R.plurals.noti_today_todo_title,
@@ -61,6 +71,7 @@ public class TodayTodoNotiReceiver extends BroadcastReceiver {
                         todoDataRealmResults.size()))
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(stringBuilder))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
                 .build();
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
