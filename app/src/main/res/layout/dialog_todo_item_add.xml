@@ -9,6 +9,8 @@
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        app:boxStrokeColor="?attr/colorOnPrimarySurface"
+        app:hintTextColor="?attr/colorOnPrimarySurface"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="16dp"
@@ -24,7 +26,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_text_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:singleLine="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

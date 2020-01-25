@@ -16,6 +16,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -152,23 +153,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void showAddDialog() {
         final View inflate = View.inflate(this, R.layout.dialog_todo_item_add, null);
-        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
-                .setTitle(getString(R.string.dialog_new_todo_title))
+        EditText editText = inflate.findViewById(R.id.edit_text_name);
+        AlertDialog dialog = new MaterialAlertDialogBuilder(this, R.style.Theme_MaterialComponents_DayNight_Dialog)
+                .setTitle("New todo")
                 .setView(inflate)
                 .setPositiveButton(getString(R.string.dialog_new_todo_create), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        EditText editText = ((EditText) inflate.findViewById(R.id.edit_text_name));
-                        if (editText.getText().toString().length() <= 0)
-                            Toast.makeText(MainActivity.this, "You must enter at least one letter.", Toast.LENGTH_SHORT).show();
-                        else {
-                            TodoData newTodoData = new TodoData(editText.getText().toString());
-                            adapter.getList().add(newTodoData);
-                            adapter.notifyItemInserted(adapter.getItemCount());
-                            todoRealm.beginTransaction();
-                            todoRealm.copyToRealm(newTodoData);
-                            todoRealm.commitTransaction();
-                        }
+                        saveTodo(editText.getText().toString());
                     }
                 })
                 .setNegativeButton(getString(R.string.dialog_button_cancel), new DialogInterface.OnClickListener() {
@@ -178,9 +170,27 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }).create();
 
+        editText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                saveTodo(editText.getText().toString());
+                dialog.cancel();
+                return false;
+            }
+        });
+
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         dialog.show();
         inflate.findViewById(R.id.edit_text_name).requestFocus();
+    }
+
+    private void saveTodo(String s) {
+        if (s.length() <= 0)
+            Toast.makeText(MainActivity.this, "You must enter at least one letter.", Toast.LENGTH_SHORT).show();
+        else {
+            adapter.getList().add(new TodoData(s));
+            adapter.notifyItemInserted(adapter.getItemCount());
+        }
     }
 
     public void onViewPreviousTodoClock(View view) {
