@@ -13,6 +13,7 @@
     <string name="str_recycler_view_empty_subtitle">내일 할 일을 만드려면 + 버튼을 누르세요</string>
 
     <string name="title_activity_settings">설정</string>
+    <string name="title_activity_calendar">지난 할 일 보기</string>
 
     <string name="settings_pref_reset_time_title">초기화 시간</string>
     <string name="settings_pref_reset_time_summary">%1$s에 모든 내용을 초기화하고 알립니다.</string>

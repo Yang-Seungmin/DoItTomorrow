@@ -60,7 +60,10 @@ public class TodoData extends RealmObject {
     }
 
     public String getCreatedDateString() {
-        Log.d("times_item", SimpleDateFormat.getDateTimeInstance().format(new Date(createdDate)));
+        if(BuildConfig.DEBUG) {
+            Log.d("times_item", SimpleDateFormat.getDateTimeInstance().format(new Date(createdDate)));
+            return String.valueOf(createdDate) + " | " + SimpleDateFormat.getDateTimeInstance().format(createdDate);
+        }
         return SimpleDateFormat.getDateTimeInstance().format(createdDate) + "에 생성됨";
         //return new SimpleDateFormat("a hh:mm").format(new Date(createdDate)) + "에 생성됨";
     }
