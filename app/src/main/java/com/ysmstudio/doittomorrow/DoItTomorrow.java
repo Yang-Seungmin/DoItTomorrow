@@ -45,7 +45,8 @@ public class DoItTomorrow extends Application {
         calendar.set(Calendar.MINUTE, timePreference.getInt("reset_minute", 0));
         calendar.set(Calendar.SECOND, 0);
 
-        Toast.makeText(this, SimpleDateFormat.getDateTimeInstance().format(calendar.getTimeInMillis()) + "에 알립니다", Toast.LENGTH_SHORT).show();
+        if(BuildConfig.DEBUG)
+            Toast.makeText(this, SimpleDateFormat.getDateTimeInstance().format(calendar.getTimeInMillis()) + "에 알립니다", Toast.LENGTH_SHORT).show();
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         if (alarmManager != null)
