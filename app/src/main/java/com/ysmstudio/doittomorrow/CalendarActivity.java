@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.CalendarView;
 import android.widget.Toast;
 
@@ -38,6 +39,8 @@ public class CalendarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_calendar);
         binding.setActivity(this);
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         timePreference = getSharedPreferences("pref_time", MODE_PRIVATE);
 
@@ -45,12 +48,23 @@ public class CalendarActivity extends AppCompatActivity {
 
         initRealm();
         setRecyclerView();
+        initCalendarAndRecyclerView();
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void initCalendarAndRecyclerView() {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, -1);
         binding.calendarView.setDate(calendar.getTimeInMillis());
         onDateChangeListener.onSelectedDayChange(binding.calendarView,
-               calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
     }
 
     private void initRealm() {
@@ -70,7 +84,8 @@ public class CalendarActivity extends AppCompatActivity {
     }
 
     private void setRecyclerViewItem(long startMillis, long endMillis) {
-        Log.d("startMillis", startMillis + "~" + endMillis);
+        if (BuildConfig.DEBUG)
+            Log.d("startMillis", startMillis + "~" + endMillis);
         todoDataRealmResults = todoRealm.where(TodoData.class)
                 .greaterThanOrEqualTo("createdDate", startMillis)
                 .lessThanOrEqualTo("createdDate", endMillis)
