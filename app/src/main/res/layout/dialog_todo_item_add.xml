@@ -9,8 +9,8 @@
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        app:boxStrokeColor="?attr/colorOnPrimarySurface"
-        app:hintTextColor="?attr/colorOnPrimarySurface"
+        app:boxStrokeColor="?attr/colorOnSurface"
+        app:hintTextColor="?attr/colorOnSurface"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="16dp"

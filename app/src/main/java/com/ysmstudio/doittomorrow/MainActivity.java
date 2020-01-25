@@ -173,8 +173,10 @@ public class MainActivity extends AppCompatActivity {
         editText.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                saveTodo(editText.getText().toString());
-                dialog.cancel();
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    saveTodo(editText.getText().toString());
+                    dialog.cancel();
+                }
                 return false;
             }
         });
@@ -188,7 +190,11 @@ public class MainActivity extends AppCompatActivity {
         if (s.length() <= 0)
             Toast.makeText(MainActivity.this, "You must enter at least one letter.", Toast.LENGTH_SHORT).show();
         else {
-            adapter.getList().add(new TodoData(s));
+            TodoData todoData = new TodoData(s);
+            adapter.getList().add(todoData);
+            todoRealm.beginTransaction();
+            todoRealm.copyToRealm(todoData);
+            todoRealm.commitTransaction();
             adapter.notifyItemInserted(adapter.getItemCount());
         }
     }
@@ -200,11 +206,11 @@ public class MainActivity extends AppCompatActivity {
     private SwipeDeleteRecyclerView.OnSwipeListener onSwipeListener = new SwipeDeleteRecyclerView.OnSwipeListener() {
         @Override
         public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, final int position, int direction) {
-            if(todoRealm != null) {
+            if (todoRealm != null) {
                 todoRealm.executeTransactionAsync(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
-                        
+
                     }
                 }, new Realm.Transaction.OnSuccess() {
                     @Override
