@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         timePreference = getSharedPreferences("pref_time", MODE_PRIVATE);
 
         setSupportActionBar(binding.toolbar);
+        binding.content.recyclerEmptyView.textViewEmptySubtitle.setOnClickListener(this::onViewPreviousTodoClock);
     }
 
     @Override
