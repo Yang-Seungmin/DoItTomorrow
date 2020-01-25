@@ -129,6 +129,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.item_settings:
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                 break;
+            case R.id.item_view_prev_todo:
+                onViewPreviousTodoClock(null);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -182,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onViewPreviousTodoClock(View view) {
-        // TODO: 2020-01-19 previous activity 이동
+        startActivity(new Intent(this, CalendarActivity.class));
     }
 
     private SwipeDeleteRecyclerView.OnSwipeListener onSwipeListener = new SwipeDeleteRecyclerView.OnSwipeListener() {
@@ -204,7 +206,8 @@ public class MainActivity extends AppCompatActivity {
                                 .deleteAllFromRealm();
                         todoRealm.commitTransaction();
 
-                        Snackbar.make(getWindow().getDecorView(), "삭제되었습니다.", BaseTransientBottomBar.LENGTH_SHORT).show();
+                        Snackbar.make(binding.container, "삭제되었습니다.", BaseTransientBottomBar.LENGTH_LONG)
+                                .setAction("Action", null).show();
                     }
                 }, new Realm.Transaction.OnError() {
                     @Override
