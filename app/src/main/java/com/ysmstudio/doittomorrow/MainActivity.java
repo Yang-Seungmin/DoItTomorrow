@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onFabClick(View view) {
         final View inflate = View.inflate(this, R.layout.dialog_todo_item_add, null);
-        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
+        AlertDialog dialog = new MaterialAlertDialogBuilder(this, R.style.Theme_MaterialComponents_DayNight_Dialog)
                 .setTitle("New todo")
                 .setView(inflate)
                 .setPositiveButton("Create", new DialogInterface.OnClickListener() {
