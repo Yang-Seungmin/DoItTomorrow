@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         binding.setActivity(this);
 
         setSupportActionBar(binding.toolbar);
+        binding.content.recyclerEmptyView.textViewEmptySubtitle.setOnClickListener(this::onViewPreviousTodoClock);
 
         setRecyclerView();
     }
