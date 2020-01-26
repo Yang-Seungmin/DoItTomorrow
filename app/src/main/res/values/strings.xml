@@ -32,4 +32,9 @@
         <item quantity="other">Today you have %1$s todos</item>
     </plurals>
 
+    <!-- AppInfoActivity and xmls -->
+    <string name="app_icon_contributors" translatable="false">
+        <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    </string>
+
 </resources>
