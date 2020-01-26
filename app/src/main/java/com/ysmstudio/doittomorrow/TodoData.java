@@ -1,5 +1,6 @@
 package com.ysmstudio.doittomorrow;
 
+import android.util.Log;
 import android.view.View;
 
 import java.text.SimpleDateFormat;
@@ -13,6 +14,7 @@ public class TodoData extends RealmObject {
 
     @PrimaryKey
     private long createdDate;
+
     private boolean isChecked;
 
     public TodoData() {
@@ -49,8 +51,25 @@ public class TodoData extends RealmObject {
         this.createdDate = createdDate;
     }
 
-    public String getCreatedDateString() {
-        return new SimpleDateFormat("a hh:mm").format(new Date(createdDate)) + "에 생성됨";
+    public boolean isChecked() {
+        return isChecked;
     }
 
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
+
+    public String getCreatedDateString() {
+        if(BuildConfig.DEBUG) {
+            Log.d("times_item", SimpleDateFormat.getDateTimeInstance().format(new Date(createdDate)));
+            return String.valueOf(createdDate) + " | " + SimpleDateFormat.getDateTimeInstance().format(createdDate);
+        }
+        return SimpleDateFormat.getDateTimeInstance().format(createdDate) + "에 생성됨";
+        //return new SimpleDateFormat("a hh:mm").format(new Date(createdDate)) + "에 생성됨";
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

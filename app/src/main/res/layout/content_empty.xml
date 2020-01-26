@@ -1,43 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:showIn="@layout/activity_main">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/image_view_empty_icon"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_calendar_today_24"
-        android:tint="?attr/colorSecondaryVariant"/>
+    <data>
+        <variable
+            name="activity"
+            type="com.ysmstudio.doittomorrow.MainActivity" />
+    </data>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text_view_empty_title"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_empty"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image_view_empty_icon"
-        android:text="@string/str_recycler_view_empty_title"
-        android:layout_marginTop="16dp"
-        android:textAppearance="@style/AppTheme.H6" />
+        android:layout_height="match_parent"
+        tools:showIn="@layout/activity_main">
 
-    <TextView
-        android:id="@+id/text_view_empty_subtitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="96dp"
-        android:text="@string/str_recycler_view_empty_subtitle"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:id="@+id/layout_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/text_view_empty_create"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/image_view_empty_icon"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:tint="?attr/colorSecondaryVariant"
+                app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_view_empty_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/str_recycler_view_empty_title"
+                android:textAppearance="@style/AppTheme.H6" />
+
+            <TextView
+                android:id="@+id/text_view_empty_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="지나간 할 일을 보려면 여기를 클릭하세요."
+                android:onClick="@{activity::onViewPreviousTodoClock}"/>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/text_view_empty_create"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="96dp"
+            android:gravity="center"
+            android:text="@string/str_recycler_view_empty_subtitle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
