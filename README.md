@@ -8,7 +8,7 @@
 ## 주요 기능
 1. 메인 화면에서 +를 눌러 내일 할 일을 빠르게 등록할 수 있다.
 2. 이렇게 등록한 할 일은 다음날 오전 6시에 상단바에 알림으로 나온다.
-  - 알림 시간은 설정을 통해 변경할 수 있다.
+    - 알림 시간은 설정을 통해 변경할 수 있다.
 3. 등록한 할 일은 Swipe to delete로 삭제할 수 있다.
 4. 지나간 할 일을 확인할 수 있다.
 
@@ -27,5 +27,8 @@
 
 ## 사용한 라이브러리
 1. AndroidX
+    - AppCompat
+    - ConstraintLayout
+    - Preference
 2. Material Design Component 1.2.0-alpha03
 3. Realm 6.1.0
