@@ -49,7 +49,7 @@
                 android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:text="@string/str_recycler_view_goto_calendar_activity"
-                android:onClick="@{activity::onViewPreviousTodoClock}"/>
+                android:onClick="@{activity::onViewPastTodoClick}"/>
 
         </LinearLayout>
 

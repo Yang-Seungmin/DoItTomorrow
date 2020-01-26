@@ -30,7 +30,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
@@ -44,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
 
     private Realm todoRealm;
     private RealmResults<TodoData> todoDataRealmResults;
+
+    /**
+     * Realm 값이 변경되었을 때 실행
+     */
     private RealmChangeListener<RealmResults<TodoData>> todoDataRealmChangeListener = new RealmChangeListener<RealmResults<TodoData>>() {
         @Override
         public void onChange(RealmResults<TodoData> todoData) {
@@ -63,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         timePreference = getSharedPreferences("pref_time", MODE_PRIVATE);
 
         setSupportActionBar(binding.toolbar);
-        binding.content.recyclerEmptyView.getRoot().setOnClickListener(this::onViewPreviousTodoClock);
+        binding.content.recyclerEmptyView.getRoot().setOnClickListener(this::onViewPastTodoClick);
     }
 
     @Override
@@ -72,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
         loadTodoData();
     }
 
+    /**
+     * 24시간동안의 모든 TodoData를 가져온다.
+     */
     private void loadTodoData() {
         showRecyclerViewProgressBar();
         RealmConfiguration todoRealmConfiguration = new RealmConfiguration.Builder()
@@ -86,6 +92,10 @@ public class MainActivity extends AppCompatActivity {
         todoDataRealmResults.addChangeListener(todoDataRealmChangeListener);
     }
 
+    /**
+     * 오늘 날짜, reset_hour, reset_minute를 기준으로 24시간동안의 시간 배열을 반환
+     * @return
+     */
     private long[] getListTimeMilis() {
         Calendar calendarStart = Calendar.getInstance();
         calendarStart.set(Calendar.HOUR_OF_DAY, timePreference.getInt("reset_hour", 6));
@@ -107,11 +117,17 @@ public class MainActivity extends AppCompatActivity {
         return new long[]{calendarStart.getTimeInMillis(), calendarEnd.getTimeInMillis()};
     }
 
+    /**
+     * RecyclerView의 ProgressBar를 보여준다.
+     */
     private void showRecyclerViewProgressBar() {
         binding.content.progressBar.setVisibility(View.VISIBLE);
         binding.content.recyclerViewTodoTomorrow.setVisibility(View.GONE);
     }
 
+    /**
+     * RecyclerView의 ProgressBar를 숨긴다.
+     */
     private void hideRecyclerViewProgressBar() {
         binding.content.progressBar.setVisibility(View.GONE);
         binding.content.recyclerViewTodoTomorrow.setVisibility(View.VISIBLE);
@@ -131,11 +147,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                 break;
             case R.id.item_view_prev_todo:
-                onViewPreviousTodoClock(null);
+                onViewPastTodoClick(null);
         }
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * RecyclerView 초기화
+     */
     private void setRecyclerView() {
         adapter = new TodoRecyclerViewAdapter();
         adapter.setList(new ArrayList<>(todoDataRealmResults));
@@ -147,10 +166,17 @@ public class MainActivity extends AppCompatActivity {
         binding.content.recyclerViewTodoTomorrow.setOnSwipeListener(onSwipeListener);
     }
 
+    /**
+     * FAB를 클릭했을 때 수행
+     * @param view
+     */
     public void onFabClick(View view) {
         showAddDialog();
     }
 
+    /**
+     * TodoData 추가 다이얼로그를 보여준다.
+     */
     private void showAddDialog() {
         final View inflate = View.inflate(this, R.layout.dialog_todo_item_add, null);
         EditText editText = inflate.findViewById(R.id.edit_text_name);
@@ -186,6 +212,10 @@ public class MainActivity extends AppCompatActivity {
         inflate.findViewById(R.id.edit_text_name).requestFocus();
     }
 
+    /**
+     * TodoData를 Realm에 저장한다.
+     * @param s TodoData의 name
+     */
     private void saveTodo(String s) {
         if (s.length() <= 0)
             Toast.makeText(MainActivity.this, "You must enter at least one letter.", Toast.LENGTH_SHORT).show();
@@ -199,10 +229,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onViewPreviousTodoClock(View view) {
+    /**
+     * 지난 할 일 보기 버튼을 클릭했을 때 수행
+     * @param view
+     */
+    public void onViewPastTodoClick(View view) {
         startActivity(new Intent(this, CalendarActivity.class));
     }
 
+    /**
+     * Swipe to Delete 구현
+     */
     private SwipeDeleteRecyclerView.OnSwipeListener onSwipeListener = new SwipeDeleteRecyclerView.OnSwipeListener() {
         @Override
         public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, final int position, int direction) {
