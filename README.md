@@ -29,6 +29,6 @@
 1. AndroidX
     - AppCompat 1.1.0
     - ConstraintLayout 1.1.3
-    - Preference 1/1/0
+    - Preference 1.1.0
 2. Material Design Component 1.2.0-alpha03
 3. Realm 6.1.0
