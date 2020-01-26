@@ -49,6 +49,10 @@ public class TodayTodoNotiReceiver extends BroadcastReceiver {
         loadTodoData();
     }
 
+    /**
+     * 알림 생성
+     * @param context
+     */
     private void createNotification(Context context) {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < todoDataRealmResults.size(); i++) {
@@ -78,6 +82,9 @@ public class TodayTodoNotiReceiver extends BroadcastReceiver {
         notificationManagerCompat.notify(NOTI_ID_TODAY_TODO, notification);
     }
 
+    /**
+     * 알림에서 보여줄 TodoData를 가져온다.
+     */
     private void loadTodoData() {
         RealmConfiguration todoRealmConfiguration = new RealmConfiguration.Builder()
                 .name("todos.realm").build();

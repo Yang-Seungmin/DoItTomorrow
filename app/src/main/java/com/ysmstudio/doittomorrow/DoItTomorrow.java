@@ -17,6 +17,9 @@ import java.util.Calendar;
 
 import io.realm.Realm;
 
+/**
+ * 전역 Application 클래스
+ */
 public class DoItTomorrow extends Application {
     public static final int REQ_TODAY_TODO_PENDING = 100;
 
@@ -33,6 +36,10 @@ public class DoItTomorrow extends Application {
         createAlarm();
     }
 
+    /**
+     * 매일 알림을 위해 AlarmService를 통해 알람을 생성한다.
+     * 이미 있을 경우 그 알람을 제거하고 새로 만든다.
+     */
     public void createAlarm() {
         timePreference = getSharedPreferences("pref_time", MODE_PRIVATE);
         pendingIntent = createTodayTodoNotiPendingIntent(
@@ -53,12 +60,18 @@ public class DoItTomorrow extends Application {
             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 86400000, pendingIntent);
     }
 
+    /**
+     * 이미 알람이 set되어 있을 경우 알람을 지운다.
+     */
     public void removeAlarm() {
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         if(alarmManager != null)
             alarmManager.cancel(pendingIntent);
     }
 
+    /**
+     * Android 8.0 이상에서 작동하는 알림 채널을 생성하는 함수
+     */
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
@@ -71,6 +84,12 @@ public class DoItTomorrow extends Application {
         }
     }
 
+    /**
+     * 알람에 반응할 Receiver를 PendingIntent를 통해 등록한다.
+     * @param hour
+     * @param minute
+     * @return
+     */
     public PendingIntent createTodayTodoNotiPendingIntent(int hour, int minute) {
         Intent intent = new Intent(this, TodayTodoNotiReceiver.class);
         intent.putExtra("hour", hour);

@@ -64,6 +64,9 @@ public class SettingsActivity extends AppCompatActivity {
             prefResetTime = findPreference("pref_reset_time");
         }
 
+        /**
+         * Reset time 설정을 클릭했을 때 수행
+         */
         private Preference.OnPreferenceClickListener onPreferenceClickListenerReset =
                 new Preference.OnPreferenceClickListener() {
                     @Override
@@ -92,8 +95,8 @@ public class SettingsActivity extends AppCompatActivity {
                                             h = timePicker.getCurrentHour();
                                             m = timePicker.getCurrentMinute();
                                         }
-                                        setResetTime(h, m);
 
+                                        setResetTime(h, m);
                                         displayResetTime();
                                         doItTomorrow.createAlarm();
                                     }
@@ -105,6 +108,11 @@ public class SettingsActivity extends AppCompatActivity {
                     }
                 };
 
+        /**
+         * Reset time을 저장한다.
+         * @param h
+         * @param m
+         */
         private void setResetTime(int h, int m) {
             SharedPreferences.Editor editor = timePreference.edit();
             editor.putInt("reset_hour", h);
@@ -112,6 +120,9 @@ public class SettingsActivity extends AppCompatActivity {
             editor.apply();
         }
 
+        /**
+         * Reset time을 summary에 보여준다.
+         */
         private void displayResetTime() {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("a hh:mm");
             Calendar calendar = Calendar.getInstance();
