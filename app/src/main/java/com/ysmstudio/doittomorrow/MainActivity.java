@@ -220,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
         if (s.length() <= 0)
             Toast.makeText(MainActivity.this, "You must enter at least one letter.", Toast.LENGTH_SHORT).show();
         else {
-            TodoData todoData = new TodoData(s);
+            TodoData todoData = new TodoData(s.trim());
             adapter.getList().add(todoData);
             todoRealm.beginTransaction();
             todoRealm.copyToRealm(todoData);
