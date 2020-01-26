@@ -1,6 +1,8 @@
 # DoItTomorrow
 내일할거 Application
 
+<img src="https://github.com/Yang-Seungmin/DoItTomorrow/blob/readme_update/screenshots/device-2020-01-26-160226.png" width="270" height="555"> <img src="https://github.com/Yang-Seungmin/DoItTomorrow/blob/readme_update/screenshots/device-2020-01-26-160322.png" width="270" height="555">
+
 앱의 이름은 https://www.youtube.com/watch?v=_g6ggSNn4YU 여기에서 가져왔습니다.
 
 ## 주요 기능
