@@ -66,7 +66,7 @@ public class TodayTodoNotiReceiver extends BroadcastReceiver {
 
         Notification notification = new NotificationCompat.Builder(context, DoItTomorrow.CHANNEL_ID_TODAY_TODO)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle(context.getResources().getQuantityString(R.plurals.noti_today_todo_title,
+                .setContentTitle(context.getResources().getQuantityString(R.plurals.str_noti_today_todo_title,
                         todoDataRealmResults.size(),
                         todoDataRealmResults.size()))
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(stringBuilder))

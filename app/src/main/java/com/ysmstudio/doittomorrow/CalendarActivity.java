@@ -110,7 +110,8 @@ public class CalendarActivity extends AppCompatActivity {
 
             setRecyclerViewItem(calendarStart.getTimeInMillis(), calendarEnd.getTimeInMillis());
 
-            binding.textView.setText(SimpleDateFormat.getDateTimeInstance().format(calendarStart.getTimeInMillis()) +
+            binding.textView.setText(
+                    SimpleDateFormat.getDateTimeInstance().format(calendarStart.getTimeInMillis()) +
                     " ~ " +
                     SimpleDateFormat.getDateTimeInstance().format(calendarEnd.getTimeInMillis()));
         }

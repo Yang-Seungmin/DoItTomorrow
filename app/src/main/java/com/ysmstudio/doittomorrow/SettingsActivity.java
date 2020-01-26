@@ -81,7 +81,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                         new MaterialAlertDialogBuilder(getContext())
                                 .setView(dialogView)
-                                .setPositiveButton(getString(R.string.dialog_button_ok), new DialogInterface.OnClickListener() {
+                                .setPositiveButton(getString(R.string.str_dialog_button_ok), new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         int h, m;
@@ -98,7 +98,7 @@ public class SettingsActivity extends AppCompatActivity {
                                         doItTomorrow.createAlarm();
                                     }
                                 })
-                                .setNegativeButton(getString(R.string.dialog_button_cancel), null)
+                                .setNegativeButton(getString(R.string.str_dialog_button_cancel), null)
                                 .show();
 
                         return false;
@@ -122,7 +122,7 @@ public class SettingsActivity extends AppCompatActivity {
             Log.d("resetminute", String.valueOf(timePreference.getInt("reset_minute", 0)));
 
             if(prefResetTime != null) prefResetTime.setSummary(
-                    getString(R.string.settings_pref_reset_time_summary, simpleDateFormat.format(calendar.getTimeInMillis()))
+                    getString(R.string.str_settings_pref_reset_time_summary, simpleDateFormat.format(calendar.getTimeInMillis()))
             );
         }
     }

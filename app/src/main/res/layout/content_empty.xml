@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:gravity="center"
-                android:text="지나간 할 일을 보려면 여기를 클릭하세요."
+                android:text="@string/str_recycler_view_goto_calendar_activity"
                 android:onClick="@{activity::onViewPreviousTodoClock}"/>
 
         </LinearLayout>

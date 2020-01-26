@@ -157,13 +157,13 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog dialog = new MaterialAlertDialogBuilder(this, R.style.Theme_MaterialComponents_DayNight_Dialog)
                 .setTitle("New todo")
                 .setView(inflate)
-                .setPositiveButton(getString(R.string.dialog_new_todo_create), new DialogInterface.OnClickListener() {
+                .setPositiveButton(getString(R.string.str_dialog_new_todo_create), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         saveTodo(editText.getText().toString());
                     }
                 })
-                .setNegativeButton(getString(R.string.dialog_button_cancel), new DialogInterface.OnClickListener() {
+                .setNegativeButton(getString(R.string.str_dialog_button_cancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 

@@ -2,7 +2,7 @@
 
     <Preference
         app:key="pref_reset_time"
-        app:title="@string/settings_pref_reset_time_title"
-        app:summary="@string/settings_pref_reset_time_summary" />
+        app:title="@string/str_settings_pref_reset_time_title"
+        app:summary="@string/str_settings_pref_reset_time_summary" />
 
 </PreferenceScreen>

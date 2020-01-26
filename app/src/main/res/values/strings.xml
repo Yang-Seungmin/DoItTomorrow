@@ -1,25 +1,35 @@
 <resources>
     <string name="app_name">DoItTomorrow</string>
 
+    <string name="str_dialog_button_ok">OK</string>
+    <string name="str_dialog_button_cancel">Cancel</string>
 
-    <string name="dialog_button_ok">OK</string>
-    <string name="dialog_button_cancel">Cancel</string>
+    <!-- CalendarActivity with xml -->
+    <string name="str_title_activity_calendar">View past todo</string>
 
-    <string name="dialog_new_todo_title">New todo</string>
-    <string name="dialog_new_todo_hint">Input something to do tomorrow</string>
-    <string name="dialog_new_todo_create">Create</string>
-
+    <!-- MainActivity with xmls -->
     <string name="str_recycler_view_empty_title">You don\'t have something to do tomorrow</string>
     <string name="str_recycler_view_empty_subtitle">Click + button to create a todo</string>
+    <string name="str_recycler_view_goto_calendar_activity">If you check past todo(s), click here.</string>
 
-    <string name="title_activity_settings">Settings</string>
-    <string name="title_activity_calendar">View previous todo</string>
+    <string name="str_dialog_new_todo_title">New todo</string>
+    <string name="str_dialog_new_todo_hint">Input something to do tomorrow</string>
+    <string name="str_dialog_new_todo_create">Create</string>
+    <string name="str_dialog_new_todo_least_one_letter">You must enter least 1 letter to save todo.</string>
 
-    <string name="settings_pref_reset_time_title">Reset time</string>
-    <string name="settings_pref_reset_time_summary">Reset all todo and notify at %1$s</string>
+    <!-- SettingsActivity with xml, fragment -->
+    <string name="str_title_activity_settings">Settings</string>
 
-    <plurals name="noti_today_todo_title">
+    <string name="str_settings_pref_reset_time_title">Reset time</string>
+    <string name="str_settings_pref_reset_time_summary">Reset all todo and notify at %1$s</string>
+
+    <!-- TodoData Strings -->
+    <string name="str_todo_created_at">Created at %1$s</string>
+
+    <!-- Services and Receivers -->
+    <plurals name="str_noti_today_todo_title">
         <item quantity="one">Today you have %1$s todo</item>
         <item quantity="other">Today you have %1$s todos</item>
     </plurals>
+
 </resources>
