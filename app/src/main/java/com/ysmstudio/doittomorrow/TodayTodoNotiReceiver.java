@@ -90,32 +90,15 @@ public class TodayTodoNotiReceiver extends BroadcastReceiver {
                 .name("todos.realm").build();
 
         Realm todoRealm = Realm.getInstance(todoRealmConfiguration);
-        long[] times = getListTimeMilis();
+        long[] times = Tools.getListTimeMilis(
+                timePreference.getInt("reset_hour", 6),
+                timePreference.getInt("reset_minute", 0),
+                -1
+        );
         todoDataRealmResults = todoRealm.where(TodoData.class)
                 .greaterThan("createdDate", times[0])
                 .lessThan("createdDate", times[1])
                 .findAllAsync();
         todoDataRealmResults.addChangeListener(todoDataRealmChangeListener);
-    }
-
-    private long[] getListTimeMilis() {
-        Calendar calendarStart = Calendar.getInstance();
-        calendarStart.set(Calendar.HOUR_OF_DAY, hour);
-        calendarStart.set(Calendar.MINUTE, minute);
-        calendarStart.set(Calendar.SECOND, 0);
-        calendarStart.set(Calendar.MILLISECOND, 0);
-        calendarStart.add(Calendar.DATE, -1);
-
-        Calendar calendarEnd = Calendar.getInstance();
-        calendarEnd.set(Calendar.HOUR_OF_DAY, hour);
-        calendarEnd.set(Calendar.MINUTE, minute);
-        calendarEnd.set(Calendar.SECOND, 0);
-        calendarEnd.set(Calendar.MILLISECOND, 0);
-
-        DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance();
-
-        Log.d("times", "From " + dateFormat.format(calendarStart.getTimeInMillis()) + " End " + dateFormat.format(calendarEnd.getTimeInMillis()));
-
-        return new long[]{calendarStart.getTimeInMillis(), calendarEnd.getTimeInMillis()};
     }
 }

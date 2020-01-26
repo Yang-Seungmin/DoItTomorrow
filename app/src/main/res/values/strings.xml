@@ -17,6 +17,8 @@
     <string name="str_dialog_new_todo_create">Create</string>
     <string name="str_dialog_new_todo_least_one_letter">You must enter least 1 letter to save todo.</string>
 
+    <string name="str_snackbar_deleted">Removed successfully</string>
+
     <!-- SettingsActivity with xml, fragment -->
     <string name="str_title_activity_settings">Settings</string>
 
