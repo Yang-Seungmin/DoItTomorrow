@@ -46,7 +46,7 @@ public class DoItTomorrow extends Application {
         calendar.set(Calendar.SECOND, 0);
 
         if(BuildConfig.DEBUG)
-            Toast.makeText(this, SimpleDateFormat.getDateTimeInstance().format(calendar.getTimeInMillis()) + "에 알립니다", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, SimpleDateFormat.getDateTimeInstance().format(calendar.getTimeInMillis()), Toast.LENGTH_SHORT).show();
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         if (alarmManager != null)

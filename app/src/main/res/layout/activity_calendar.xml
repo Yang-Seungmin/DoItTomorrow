@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 app:titleTextColor="?attr/colorOnPrimary"
                 app:subtitleTextColor="?attr/colorOnPrimary"
-                app:title="지난 할 일 보기"/>
+                app:title="@string/str_title_activity_calendar"/>
 
         </com.google.android.material.appbar.AppBarLayout>
 

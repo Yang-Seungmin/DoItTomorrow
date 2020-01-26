@@ -18,7 +18,7 @@
             app:titleTextColor="?attr/colorOnPrimary"
             app:subtitleTextColor="?attr/colorOnPrimary"
             app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Caption"
-            app:title="@string/title_activity_settings"/>
+            app:title="@string/str_title_activity_settings"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
