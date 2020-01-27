@@ -1,6 +1,7 @@
 package com.ysmstudio.doittomorrow;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -43,7 +44,9 @@ public class SettingsActivity extends AppCompatActivity {
         DoItTomorrow doItTomorrow;
 
         SharedPreferences timePreference;
+
         Preference prefResetTime;
+        Preference prefAbout;
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -55,6 +58,8 @@ public class SettingsActivity extends AppCompatActivity {
                 displayResetTime();
                 prefResetTime.setOnPreferenceClickListener(onPreferenceClickListenerReset);
             }
+
+            if(prefAbout != null) prefAbout.setOnPreferenceClickListener(onPreferenceClickListenerAbout);
         }
 
         private void init() {
@@ -62,6 +67,7 @@ public class SettingsActivity extends AppCompatActivity {
             timePreference = getContext().getSharedPreferences("pref_time", MODE_PRIVATE);
 
             prefResetTime = findPreference("pref_reset_time");
+            prefAbout = findPreference("pref_about");
         }
 
         /**
@@ -107,6 +113,11 @@ public class SettingsActivity extends AppCompatActivity {
                         return false;
                     }
                 };
+
+        private Preference.OnPreferenceClickListener onPreferenceClickListenerAbout = preference -> {
+            startActivity(new Intent(getActivity(), AppInfoActivity.class));
+            return false;
+        };
 
         /**
          * Reset time을 저장한다.
