@@ -23,6 +23,8 @@
     <string name="str_settings_pref_reset_time_title">Reset time</string>
     <string name="str_settings_pref_reset_time_summary">Reset all todo and notify at %1$s</string>
 
+    <string name="str_settings_about">About</string>
+
     <!-- TodoData Strings -->
     <string name="str_todo_created_at">Created at %1$s</string>
 
@@ -31,5 +33,18 @@
         <item quantity="one">Today you have %1$s todo</item>
         <item quantity="other">Today you have %1$s todos</item>
     </plurals>
+
+    <!-- AppInfoActivity and xmls -->
+    <string name="str_app_icon_contributors" translatable="false">
+        <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    </string>
+    <string name="str_app_developer_title">Developer</string>
+    <string name="str_app_developer_content">YSM Studio</string>
+
+    <string name="str_app_version_title">App Version</string>
+    <string name="str_app_version_content">1.0</string>
+
+    <string name="str_app_build_title">Build Version</string>
+    <string name="str_app_build_content">1</string>
 
 </resources>

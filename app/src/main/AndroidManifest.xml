@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CalendarActivity"></activity>
+        <activity android:name=".AppInfoActivity"></activity>
+        <activity android:name=".CalendarActivity" />
 
         <receiver
             android:name=".BootCompleteReceiver"
