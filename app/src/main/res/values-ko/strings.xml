@@ -18,6 +18,8 @@
     <string name="str_dialog_new_todo_create">만들기</string>
     <string name="str_dialog_new_todo_least_one_letter">최소 한 글자 이상 입력해야 합니다.</string>
 
+    <string name="str_snackbar_deleted">삭제되었습니다</string>
+
     <!-- SettingsActivity with xml, fragment -->
     <string name="str_title_activity_settings">설정</string>
 

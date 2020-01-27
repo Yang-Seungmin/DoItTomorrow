@@ -84,37 +84,16 @@ public class MainActivity extends AppCompatActivity {
                 .name("todos.realm").build();
 
         todoRealm = Realm.getInstance(todoRealmConfiguration);
-        long[] times = getListTimeMilis();
+        long[] times = Tools.getListTimeMilis(
+                timePreference.getInt("reset_hour", 6),
+                timePreference.getInt("reset_minute", 0),
+                0
+        );
         todoDataRealmResults = todoRealm.where(TodoData.class)
                 .greaterThanOrEqualTo("createdDate", times[0])
                 .lessThanOrEqualTo("createdDate", times[1])
                 .findAllAsync();
         todoDataRealmResults.addChangeListener(todoDataRealmChangeListener);
-    }
-
-    /**
-     * 오늘 날짜, reset_hour, reset_minute를 기준으로 24시간동안의 시간 배열을 반환
-     * @return
-     */
-    private long[] getListTimeMilis() {
-        Calendar calendarStart = Calendar.getInstance();
-        calendarStart.set(Calendar.HOUR_OF_DAY, timePreference.getInt("reset_hour", 6));
-        calendarStart.set(Calendar.MINUTE, timePreference.getInt("reset_minute", 0));
-        calendarStart.set(Calendar.SECOND, 0);
-        calendarStart.set(Calendar.MILLISECOND, 0);
-
-        Calendar calendarEnd = Calendar.getInstance();
-        calendarEnd.set(Calendar.HOUR_OF_DAY, timePreference.getInt("reset_hour", 6));
-        calendarEnd.set(Calendar.MINUTE, timePreference.getInt("reset_minute", 0));
-        calendarEnd.set(Calendar.SECOND, 0);
-        calendarEnd.set(Calendar.MILLISECOND, 0);
-        calendarEnd.add(Calendar.DATE, 1);
-
-        DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance();
-
-        Log.d("times", "From " + dateFormat.format(calendarStart.getTimeInMillis()) + " End " + dateFormat.format(calendarEnd.getTimeInMillis()));
-
-        return new long[]{calendarStart.getTimeInMillis(), calendarEnd.getTimeInMillis()};
     }
 
     /**
@@ -181,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
         final View inflate = View.inflate(this, R.layout.dialog_todo_item_add, null);
         EditText editText = inflate.findViewById(R.id.edit_text_name);
         AlertDialog dialog = new MaterialAlertDialogBuilder(this, R.style.Theme_MaterialComponents_DayNight_Dialog)
-                .setTitle("New todo")
+                .setTitle(getString(R.string.str_dialog_new_todo_title))
                 .setView(inflate)
                 .setPositiveButton(getString(R.string.str_dialog_new_todo_create), new DialogInterface.OnClickListener() {
                     @Override
@@ -218,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void saveTodo(String s) {
         if (s.length() <= 0)
-            Toast.makeText(MainActivity.this, "You must enter at least one letter.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, getString(R.string.str_dialog_new_todo_least_one_letter), Toast.LENGTH_SHORT).show();
         else {
             TodoData todoData = new TodoData(s.trim());
             adapter.getList().add(todoData);
@@ -259,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
                                 .deleteAllFromRealm();
                         todoRealm.commitTransaction();
 
-                        Snackbar.make(binding.container, "삭제되었습니다.", BaseTransientBottomBar.LENGTH_LONG)
+                        Snackbar.make(binding.container, getString(R.string.str_snackbar_deleted), BaseTransientBottomBar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                     }
                 }, new Realm.Transaction.OnError() {
