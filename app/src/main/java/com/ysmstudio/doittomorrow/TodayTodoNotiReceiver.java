@@ -29,8 +29,6 @@ public class TodayTodoNotiReceiver extends BroadcastReceiver {
     private Context context;
     private int hour, minute;
 
-    private SharedPreferences timePreference;
-
     private RealmResults<TodoData> todoDataRealmResults;
     private RealmChangeListener<RealmResults<TodoData>> todoDataRealmChangeListener = new RealmChangeListener<RealmResults<TodoData>>() {
         @Override
@@ -69,7 +67,7 @@ public class TodayTodoNotiReceiver extends BroadcastReceiver {
         );
 
         Notification notification = new NotificationCompat.Builder(context, DoItTomorrow.CHANNEL_ID_TODAY_TODO)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.app_icon)
                 .setContentTitle(context.getResources().getQuantityString(R.plurals.str_noti_today_todo_title,
                         todoDataRealmResults.size(),
                         todoDataRealmResults.size()))
@@ -91,8 +89,8 @@ public class TodayTodoNotiReceiver extends BroadcastReceiver {
 
         Realm todoRealm = Realm.getInstance(todoRealmConfiguration);
         long[] times = Tools.getListTimeMilis(
-                timePreference.getInt("reset_hour", 6),
-                timePreference.getInt("reset_minute", 0),
+                hour,
+                minute,
                 -1
         );
         todoDataRealmResults = todoRealm.where(TodoData.class)
