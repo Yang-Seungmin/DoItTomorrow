@@ -1,3 +1,52 @@
 <resources>
     <string name="app_name">DoItTomorrow</string>
+
+    <string name="str_dialog_button_ok">OK</string>
+    <string name="str_dialog_button_cancel">Cancel</string>
+
+    <!-- CalendarActivity with xml -->
+    <string name="str_title_activity_calendar">View past todo</string>
+
+    <!-- MainActivity with xmls -->
+    <string name="str_recycler_view_empty_title">You don\'t have something to do tomorrow</string>
+    <string name="str_recycler_view_empty_subtitle">Click + button to create a todo</string>
+    <string name="str_recycler_view_goto_calendar_activity">If you check past todo(s), click here.</string>
+
+    <string name="str_dialog_new_todo_title">New todo</string>
+    <string name="str_dialog_new_todo_hint">Input something to do tomorrow</string>
+    <string name="str_dialog_new_todo_create">Create</string>
+    <string name="str_dialog_new_todo_least_one_letter">You must enter least 1 letter to save todo.</string>
+
+    <string name="str_snackbar_deleted">Removed successfully</string>
+
+    <!-- SettingsActivity with xml, fragment -->
+    <string name="str_title_activity_settings">Settings</string>
+
+    <string name="str_settings_pref_reset_time_title">Reset time</string>
+    <string name="str_settings_pref_reset_time_summary">Reset all todo and notify at %1$s</string>
+
+    <string name="str_settings_about">About</string>
+
+    <!-- TodoData Strings -->
+    <string name="str_todo_created_at">Created at %1$s</string>
+
+    <!-- Services and Receivers -->
+    <plurals name="str_noti_today_todo_title">
+        <item quantity="one">Today you have %1$s todo</item>
+        <item quantity="other">Today you have %1$s todos</item>
+    </plurals>
+
+    <!-- AppInfoActivity and xmls -->
+    <string name="str_app_icon_contributors" translatable="false">
+        <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    </string>
+    <string name="str_app_developer_title">Developer</string>
+    <string name="str_app_developer_content">YSM Studio</string>
+
+    <string name="str_app_version_title">App Version</string>
+    <string name="str_app_version_content">1.0</string>
+
+    <string name="str_app_build_title">Build Version</string>
+    <string name="str_app_build_content">1</string>
+
 </resources>

@@ -1,0 +1,12 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Preference
+        app:key="pref_reset_time"
+        app:title="@string/str_settings_pref_reset_time_title"
+        app:summary="@string/str_settings_pref_reset_time_summary" />
+
+    <Preference
+        app:key="pref_about"
+        app:title="@string/str_settings_about" />
+
+</PreferenceScreen>

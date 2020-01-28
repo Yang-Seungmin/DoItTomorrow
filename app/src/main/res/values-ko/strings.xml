@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">내일할거</string>
+
+    <string name="str_dialog_button_ok">확인</string>
+    <string name="str_dialog_button_cancel">취소</string>
+
+    <!--CalendarActivity with xml -->
+    <string name="str_title_activity_calendar">지난 할 일 보기</string>
+
+    <!-- MainActivity with xmls -->
+    <string name="str_recycler_view_empty_title">내일 할 게 아무것도 없네요</string>
+    <string name="str_recycler_view_empty_subtitle">내일 할 일을 만드려면 + 버튼을 누르세요</string>
+    <string name="str_recycler_view_goto_calendar_activity">지난 할 일을 보려면 여기를 클릭하세요.</string>
+
+    <string name="str_dialog_new_todo_hint">할 일을 입력하세요.</string>
+    <string name="str_dialog_new_todo_title">새 할 일</string>
+    <string name="str_dialog_new_todo_create">만들기</string>
+    <string name="str_dialog_new_todo_least_one_letter">최소 한 글자 이상 입력해야 합니다.</string>
+
+    <string name="str_snackbar_deleted">삭제되었습니다</string>
+
+    <!-- SettingsActivity with xml, fragment -->
+    <string name="str_title_activity_settings">설정</string>
+
+    <string name="str_settings_pref_reset_time_title">초기화 시간</string>
+    <string name="str_settings_pref_reset_time_summary">%1$s에 모든 내용을 초기화하고 알립니다.</string>
+
+    <!-- TodoData Strings -->
+    <string name="str_todo_created_at">%1$s에 생성됨</string>
+
+    <!-- Services and Receivers -->
+    <plurals name="str_noti_today_todo_title">
+        <item quantity="other">오늘은 %1$s개의 할 일이 있어요</item>
+    </plurals>
+</resources>
