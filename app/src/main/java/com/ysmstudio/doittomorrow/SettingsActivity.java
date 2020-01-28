@@ -6,9 +6,11 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TimePicker;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -27,7 +29,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        setSupportActionBar(findViewById(R.id.toolbar));
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.settings, new SettingsFragment())
@@ -37,6 +39,12 @@ public class SettingsActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == android.R.id.home) finish();
+        return super.onOptionsItemSelected(item);
     }
 
     public static class SettingsFragment extends PreferenceFragmentCompat {
@@ -88,7 +96,7 @@ public class SettingsActivity extends AppCompatActivity {
                             timePicker.setCurrentMinute(timePreference.getInt("reset_minute", 0));
                         }
 
-                        new MaterialAlertDialogBuilder(getContext())
+                        new MaterialAlertDialogBuilder(getContext(), R.style.Theme_MaterialComponents_DayNight_Dialog)
                                 .setView(dialogView)
                                 .setPositiveButton(getString(R.string.str_dialog_button_ok), new DialogInterface.OnClickListener() {
                                     @Override
